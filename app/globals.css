@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+#gradient-canvas {
+  --gradient-color-1: #32cd32;
+  --gradient-color-2: #ffff00;
+  --gradient-color-3: #ffc0cb;
+  --gradient-color-4: #800080;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
