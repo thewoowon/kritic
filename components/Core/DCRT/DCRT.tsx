@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 
 const DCRT = () => {
@@ -7,25 +7,6 @@ const DCRT = () => {
     loading: true,
     error: false,
   });
-
-  useEffect(() => {
-    fetch("https://api.dcrdata.org/api/block/best")
-      .then((res) => res.json())
-      .then((data) => {
-        setState({
-          data: data,
-          loading: false,
-          error: false,
-        });
-      })
-      .catch((error) => {
-        setState({
-          data: [],
-          loading: false,
-          error: true,
-        });
-      });
-  }, []);
 
   if (state.loading) {
     return <div>Loading...</div>;
