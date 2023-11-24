@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { Footer, Header } from "@/components/Layout";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Kritic - Always be Awake!",
@@ -91,7 +94,13 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={montserrat.className}>
+        <Header />
+        <div className="min-h-screen flex flex-col mt-[52px] mx-auto">
+          {children}
+        </div>
+        <Footer />
+      </body>
     </html>
   );
 }
