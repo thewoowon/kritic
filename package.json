@@ -12,6 +12,7 @@
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "@xstate/react": "^3.2.2",
     "ai": "^2.2.25",
@@ -26,6 +27,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
     "react-use": "^17.4.0",
+    "recoil": "^0.7.7",
     "xstate": "^4.38.3"
   },
   "devDependencies": {
