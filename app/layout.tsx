@@ -8,7 +8,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Kritic - Always be Awake!",
+  title: "크리틱",
   description: "Always be Awake!",
 };
 
@@ -96,9 +96,7 @@ export default function RootLayout({
       </head>
       <body className={montserrat.className}>
         <Header />
-        <div className="min-h-screen flex flex-col mt-[52px] mx-auto">
-          {children}
-        </div>
+        <div className="min-h-screen flex flex-col mx-auto">{children}</div>
         <Footer />
       </body>
     </html>

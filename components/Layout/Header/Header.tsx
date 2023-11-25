@@ -56,7 +56,7 @@ const Container = styled.header`
   height: 52px;
   background-color: #fff;
   border-bottom: 1px solid #f3f3f3;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 999;
   width: 100%;

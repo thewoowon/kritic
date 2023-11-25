@@ -12,7 +12,6 @@ import SubTitle from "@/components/Element/SubTitle";
 import useScrollFadeIn from "@/hooks/useScrollFadeIn";
 import GradientSection from "@/components/svg/GradientSection";
 import HalfGradientSection from "@/components/svg/HalfGradientSection";
-import { Footer } from "@/components/Layout";
 
 export default function Home() {
   const scrollFadeIn0 = useScrollFadeIn(0.3, "20%");
@@ -25,7 +24,7 @@ export default function Home() {
   }, []);
   return (
     <main className="flex flex-col items-center w-full mx-auto overflow-hidden">
-      <Grid className="max-w-[1440px]">
+      <Grid className="max-w-[1440px] h-screen">
         <div>
           <RedGradientExtra />
         </div>
@@ -110,7 +109,7 @@ const Grid = styled.div`
   width: 100%;
   gap: 50px;
   flex-wrap: nowrap;
-  padding-bottom: 100px;
+  padding: 100px 0;
 `;
 
 const Logo = styled.div`
