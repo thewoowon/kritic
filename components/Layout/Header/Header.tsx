@@ -36,7 +36,7 @@ const Header = () => {
               </li>
             ))}
             <li>
-              <button>Kor</button> | <button>Eng</button>
+              <button>KOR</button> | <button>ENG</button>
             </li>
           </Ul>
         </div>
