@@ -1,24 +1,24 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMode: true,
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "Cross-Origin-Embedder-Policy",
-            value: "require-corp",
-          },
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin",
-          },
-        ],
-      },
-    ];
-  },
+  // reactStrictMode: true,
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/(.*)",
+  //       headers: [
+  //         {
+  //           key: "Cross-Origin-Embedder-Policy",
+  //           value: "require-corp",
+  //         },
+  //         {
+  //           key: "Cross-Origin-Opener-Policy",
+  //           value: "same-origin",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg")
@@ -44,7 +44,14 @@ const nextConfig = {
   },
   swcMinify: false,
   images: {
-    domains: ["localhost", "res.cloudinary.com", "imagedelivery.net"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "imagedelivery.net",
+        port: "",
+        pathname: "/6qzLODAqs2g1LZbVYqtuQw/**/*",
+      },
+    ],
   },
 };
 
