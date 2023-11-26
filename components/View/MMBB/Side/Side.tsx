@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import KriticDatePicker from "@/components/Element/DatePicker";
 import dynamic from "next/dynamic";
@@ -9,6 +9,7 @@ const KriticMap = dynamic(() => import("@/components/Element/Map"), {
 });
 
 const Side = () => {
+  const [date, setDate] = useState<Date | null>(new Date());
   return (
     <Grid>
       <Box>
@@ -43,7 +44,7 @@ const Side = () => {
         <KriticMap />
       </Box>
       <Box>
-        <KriticDatePicker />
+        <KriticDatePicker selectedDate={date} setSelectedDate={setDate} />
       </Box>
     </Grid>
   );
