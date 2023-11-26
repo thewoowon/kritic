@@ -1,22 +1,32 @@
+"use client";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import "react-datepicker/dist/react-datepicker.css";
+import { RecoilRoot } from "recoil";
 import { Footer, Header } from "@/components/Layout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import { NavermapsProvider as NaverMapsProvider } from "react-naver-maps";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "크리틱",
-  description: "Always be Awake!",
-};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+        retry: 0,
+      },
+    },
+  });
   return (
     <html lang="en">
       <head>
@@ -95,9 +105,20 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={montserrat.className}>
-        <Header />
-        <div className="min-h-screen flex flex-col mx-auto">{children}</div>
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+          <RecoilRoot>
+            <NaverMapsProvider
+              ncpClientId={process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || ""}
+            >
+              <Header />
+              <div className="min-h-screen flex flex-col mx-auto">
+                {children}
+              </div>
+              <Footer />
+            </NaverMapsProvider>
+          </RecoilRoot>
+          <Toaster />
+        </QueryClientProvider>
       </body>
     </html>
   );
