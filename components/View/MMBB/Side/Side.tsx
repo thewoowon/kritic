@@ -5,6 +5,7 @@ import KriticDatePicker from "@/components/Element/DatePicker";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Satellite from "@/public/svg/satellite.svg";
+import Cross from "@/public/svg/cross.svg";
 
 const memoList = [
   {
@@ -35,46 +36,51 @@ const Side = () => {
   const [date, setDate] = useState<Date | null>(new Date());
   return (
     <Grid>
-      <Box>
-        <Title>모닝 브리핑</Title>
-        <div className="w-full pt-[17px] flex flex-row gap-[8px]">
-          <OrderList>
-            <Order>
-              <div className="flex justify-between items-center w-full">
-                <OrderTitle>전일 뉴스 종합</OrderTitle>
-                <Confirm>확인하기</Confirm>
-              </div>
-              <div>전일 뉴스 총 104건 준비되었습니다.</div>
-            </Order>
-            <Order>
-              <div className="flex justify-between items-center w-full">
-                <OrderTitle>오늘 취재할 내용</OrderTitle>
-                <Confirm>확인하기</Confirm>
-              </div>
-              <div>OO대 이사장 국정 감사 파행</div>
-            </Order>
-            <Order>
-              <div className="flex justify-between items-center w-full">
-                <OrderTitle>주요 이슈 보고</OrderTitle>
-                <Confirm>확인하기</Confirm>
-              </div>
-              <div>새벽 03시 OO고속도로 13중 추돌 사고... 3명 사망</div>
-            </Order>
-          </OrderList>
-          <MemoView>
-            <HeaderDecoration />
-            {memoList.map((memo) => (
-              <MemoItem key={memo.id}>
-                <div className="flex flex-col gap-[4px]">
-                  <MemoTitle>{memo.title}</MemoTitle>
-                  <MemoContent>{memo.content}</MemoContent>
+      <div className="flex gap-[9px]">
+        <Box>
+          <Title>모닝 브리핑</Title>
+          <div className="w-full pt-[17px] flex flex-row gap-[8px]">
+            <OrderList>
+              <Order>
+                <div className="flex justify-between items-center w-full">
+                  <OrderTitle>전일 뉴스 종합</OrderTitle>
+                  <Confirm>확인하기</Confirm>
                 </div>
-                <Image src={memo.src} width={46} height={46} alt="thumbnail" />
-              </MemoItem>
-            ))}
-          </MemoView>
-        </div>
-      </Box>
+                <div>전일 뉴스 총 104건 준비되었습니다.</div>
+              </Order>
+              <Order>
+                <div className="flex justify-between items-center w-full">
+                  <OrderTitle>오늘 취재할 내용</OrderTitle>
+                  <Confirm>확인하기</Confirm>
+                </div>
+                <div>OO대 이사장 국정 감사 파행</div>
+              </Order>
+              <Order>
+                <div className="flex justify-between items-center w-full">
+                  <OrderTitle>주요 이슈 보고</OrderTitle>
+                  <Confirm>확인하기</Confirm>
+                </div>
+                <div>새벽 03시 OO고속도로 13중 추돌 사고... 3명 사망</div>
+              </Order>
+            </OrderList>
+          </div>
+        </Box>
+        <MemoView>
+          <HeaderDecoration />
+          {memoList.map((memo) => (
+            <MemoItem key={memo.id}>
+              <div className="flex flex-col gap-[4px]">
+                <MemoTitle>{memo.title}</MemoTitle>
+                <MemoContent>{memo.content}</MemoContent>
+              </div>
+              <Image src={memo.src} width={46} height={46} alt="thumbnail" />
+            </MemoItem>
+          ))}
+          <CrossButton className="absolute w-[38px] h-[38px] z-10 bg-[#C20000] rounded-full flex justify-center items-center">
+            <Cross />
+          </CrossButton>
+        </MemoView>
+      </div>
       <Box>
         <div className="flex w-full justify-between items-center">
           <Title>출근 지역</Title>
@@ -177,14 +183,15 @@ const Confirm = styled.div`
 `;
 
 const MemoView = styled.div`
-  flex: 1;
-  height: 214px;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   border: 0.5px solid #d7d7d7;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
 `;
 
 const MemoItem = styled.div`
@@ -261,4 +268,10 @@ const AlertBox = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+`;
+
+const CrossButton = styled.div`
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  bottom: 12px;
+  right: 12px;
 `;
