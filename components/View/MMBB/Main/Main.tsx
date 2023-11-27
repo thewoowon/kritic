@@ -69,9 +69,9 @@ const Buttons = styled.div`
   align-items: flex-start;
   gap: 7px;
   flex-wrap: nowrap;
-  padding: 24px 0;
+  padding: 22px 0;
 
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
 `;
 
@@ -82,15 +82,16 @@ const Box = styled.div<{
   height: 100%;
   max-height: ${(props) => props.maxHeight || "100%"};
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   background: #fff;
-  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid #d7d7d7;
 `;
 
 const HeaderDecoration = styled.div`
   width: 100%;
   height: 9px;
   background: #c20000;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;

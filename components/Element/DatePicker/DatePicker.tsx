@@ -4,8 +4,10 @@ import DatePicker from "react-datepicker";
 import { Dispatch, SetStateAction } from "react";
 import { getMonth, getYear } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import Recording from "@/public/svg/recording.svg";
+import RightArrow from "@/public/svg/right-arrow.svg";
+import LeftArrow from "@/public/svg/left-arrow.svg";
 import styles from "./DatePicker.module.scss";
+import { ko } from "date-fns/esm/locale";
 
 type WithRange = boolean | undefined;
 
@@ -49,6 +51,7 @@ const KriticDatePicker = ({ selectedDate, setSelectedDate }: Props) => {
   return (
     <div className={styles.datePickerWrapper}>
       <DatePicker
+      locale={ko}
         dateFormat="yyyy.MM.dd"
         formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
         showYearDropdown
@@ -64,8 +67,10 @@ const KriticDatePicker = ({ selectedDate, setSelectedDate }: Props) => {
             ? styles.selectedDay
             : styles.unselectedDay
         }
+        inline
         onChange={(date) => setSelectedDate(date)}
         className={styles.datePicker}
+        useWeekdaysShort={false}
         renderCustomHeader={({
           date,
           changeYear,
@@ -89,14 +94,14 @@ const KriticDatePicker = ({ selectedDate, setSelectedDate }: Props) => {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="flex">
               <button
                 type="button"
                 onClick={decreaseMonth}
                 className={styles.monthButton}
                 disabled={prevMonthButtonDisabled}
               >
-                <Recording />
+                <LeftArrow />
               </button>
               <button
                 type="button"
@@ -104,7 +109,7 @@ const KriticDatePicker = ({ selectedDate, setSelectedDate }: Props) => {
                 className={styles.monthButton}
                 disabled={nextMonthButtonDisabled}
               >
-                <Recording />
+                <RightArrow />
               </button>
             </div>
           </div>

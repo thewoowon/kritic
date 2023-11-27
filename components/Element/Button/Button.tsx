@@ -34,13 +34,13 @@ const Button = styled.button<{
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  border: 1px solid #e5e5e5;
+  border: 0.5px solid #D7D7D7;
   background-color: #fff;
   color: #000;
   font-family: Pretendard Variable;
   font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   line-height: normal;
   cursor: pointer;
   gap: 3px;
@@ -48,7 +48,7 @@ const Button = styled.button<{
     background-color: #f3f3f3;
   }
   &:active {
-    background-color: #e5e5e5;
+    background-color: #D7D7D7;
   }
   &:focus {
     outline: none;
