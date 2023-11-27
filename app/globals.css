@@ -18,3 +18,23 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
 }
+
+.react-datepicker__header {
+  text-align: center;
+  border-top-left-radius: 0.3rem;
+  padding: 0 !important;
+  position: relative;
+}
+
+.react-datepicker{
+  padding: 4px 0 0 0 !important;
+  border: 0.5px solid #D7D7D7 !important;
+}
+
+.react-datepicker__day-names{
+  width: 100%;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 6px;
+}
