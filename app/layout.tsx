@@ -1,5 +1,4 @@
 "use client";
-import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -100,9 +99,38 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/manifest.json" />
+        <title>{process.env.NEXT_PUBLIC_TITLE}</title>
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="google-site-verification"
+          content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
+        />
+        <meta
+          name="naver-site-verification"
+          content={process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION}
+        />
+        <meta
+          name="description"
+          content={process.env.NEXT_PUBLIC_DESCRIPTION}
+        />
+        <meta property="og:type" content={process.env.NEXT_PUBLIC_OG_TYPE} />
+        <meta property="og:title" content={process.env.NEXT_PUBLIC_OG_TITLE} />
+        <meta
+          property="og:description"
+          content={process.env.NEXT_PUBLIC_OG_DESCRIPTION}
+        />
+        <meta property="og:image" content={process.env.NEXT_PUBLIC_OG_IMAGE} />
+        <meta
+          property="og:site_name"
+          content={process.env.NEXT_PUBLIC_OG_SITE_NAME}
+        />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_OG_URL} />
+        <meta
+          property="og:locale"
+          content={process.env.NEXT_PUBLIC_OG_LOCALE}
+        />
       </head>
       <body className={montserrat.className}>
         <QueryClientProvider client={queryClient}>

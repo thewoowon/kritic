@@ -13,11 +13,6 @@ import GradientSection from "@/components/svg/GradientSection";
 import HalfGradientSection from "@/components/svg/HalfGradientSection";
 import { MMBBView, DCRTView } from "@/components/View";
 
-// export const metadata: Metadata = {
-//   title: "크리틱",
-//   description: "Always be Awake!",
-// };
-
 export default function Home() {
   const scrollFadeIn0 = useScrollFadeIn(0.3, "20%");
 
