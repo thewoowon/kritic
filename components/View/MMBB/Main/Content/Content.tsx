@@ -16,7 +16,7 @@ const newsString = `이스라엘의 가자지구 지상군 투입이 초읽기�
 
 const Content = () => {
   return (
-    <Container className="w-full h-[668px] px-[64px] py-[24px] overflow-scroll">
+    <Container className="w-full h-[668px] px-[64px] py-[24px] overflow-hidden">
       {newsString.split("\n").map((line, index_1) => {
         if (line.trim() === "") return;
         return (

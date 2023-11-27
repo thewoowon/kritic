@@ -56,7 +56,8 @@ const KriticMap = () => {
         overflow: "hidden",
         position: "relative",
         marginTop: "15px",
-        borderRadius: "10px",
+        borderRadius: "5px",
+        border: "1px solid #d7d7d7",
       }}
     >
       <NaverMap defaultCenter={initialLatLng} defaultZoom={12} ref={setMap}>
@@ -120,5 +121,5 @@ const ModalPanel = styled.div<{ x: number; y: number }>`
   z-index: 1000;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
 `;

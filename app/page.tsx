@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
   return (
     <main className="flex flex-col items-center w-full mx-auto overflow-hidden">
-      <Grid className="max-w-[1440px] h-screen">
+      <Grid className="max-w-[1440px] h-screen flex justify-center items-center">
         <div>
           <RedGradientExtra />
         </div>
@@ -71,7 +71,7 @@ export default function Home() {
           </SubTitle>
         </div>
         <Figure
-          className="flex relative h-[948px] text-[9px] rounded-[15px] overflow-hidden p-4 z-20"
+          className="flex relative h-[948px] text-[9px] rounded-[10px] overflow-hidden p-4 z-20 min-w-[1440px]"
           style={{
             grid: "100%/repeat(1,calc(5px * 28)) 1fr",
             boxShadow:
@@ -96,7 +96,7 @@ export default function Home() {
           </SubTitle>
         </div>
         <Figure
-          className="flex relative h-[1542px] text-[9px] rounded-[15px] overflow-hidden p-2 z-20"
+          className="flex relative h-[1542px] text-[9px] rounded-[10px] overflow-hidden p-2 z-20 min-w-[1440px]"
           style={{
             grid: "100%/repeat(1,calc(5px * 28)) 1fr",
             boxShadow:
