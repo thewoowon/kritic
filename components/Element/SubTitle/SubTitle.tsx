@@ -11,7 +11,7 @@ const SubTitle = ({ children }: SubTitleProps) => {
 export default SubTitle;
 
 const Container = styled.div`
-  color: #4e5968;
+  color: #000;
   font-size: 16px;
   font-weight: 400;
   font-family: "Pretendard Variable", sans-serif;

@@ -18,6 +18,7 @@
     "@types/react-datepicker": "^4.19.3",
     "@xstate/react": "^3.2.2",
     "ai": "^2.2.25",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.16.5",
     "gray-matter": "^4.0.3",
     "next": "14.0.1",
