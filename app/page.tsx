@@ -77,7 +77,10 @@ export default function Home() {
           </div>
         </Figure>
       </Section>
-      <GradientSection />
+      <div className="w-full relative">
+        <GradientSection />
+        <Slogan>Always be Awake!</Slogan>
+      </div>
       <Section bgColor="#fff" className="max-w-[1440px] py-[200px]">
         <div
           {...scrollFadeIn3}
@@ -137,4 +140,18 @@ const Section = styled.section<{
 
 const Figure = styled.figure`
   width: 100%;
+`;
+
+const Slogan = styled.div`
+  color: #fff;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  font-family: "Montserrat";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 10;
 `;
