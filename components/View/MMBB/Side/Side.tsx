@@ -28,6 +28,39 @@ const memoList = [
   },
 ];
 
+const scheduleList = [
+  {
+    id: 1,
+    time: "09:00",
+    content: "국회의사당 도착",
+    description: "국회의사당 1번 출입구에서 기자증 제시",
+  },
+  {
+    id: 2,
+    time: "11:00",
+    content: "OO당 당대표 기자간담회",
+    description: "3열 4번 자리 확보",
+  },
+  {
+    id: 3,
+    time: "12:00",
+    content: "식사 회동",
+    description: "OO식당에서 식사",
+  },
+  {
+    id: 4,
+    time: "15:00",
+    content: "데스크 보고",
+    description: "OO기자단 데스크 보고",
+  },
+  {
+    id: 5,
+    time: "16:00",
+    content: "저녁 식사 회동",
+    description: "OO식당에서 식사",
+  },
+];
+
 const KriticMap = dynamic(() => import("@/components/Element/Map"), {
   ssr: false,
 });
@@ -91,8 +124,21 @@ const Side = () => {
         <KriticMap />
       </Box>
       <Box className="flex flex-col justify-between">
-        <div>
+        <div className="flex justify-center gap-[9px]">
           <KriticDatePicker selectedDate={date} setSelectedDate={setDate} />
+          <ScheduleView>
+            {scheduleList.map((schedule) => (
+              <ScheduleItem key={schedule.id}>
+                <div className="flex flex-row justify-between items-center gap-[4px] w-full">
+                  <ScheduleTime>{schedule.time}</ScheduleTime>
+                  <ScheduleContent>{schedule.content}</ScheduleContent>
+                </div>
+                <ScheduleDescription>
+                  {schedule.description}
+                </ScheduleDescription>
+              </ScheduleItem>
+            ))}
+          </ScheduleView>
         </div>
         <AlertBox>데스크 보고 시간입니다. 시간을 준수하세요.</AlertBox>
       </Box>
@@ -189,7 +235,7 @@ const MemoView = styled.div`
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   border: 0.5px solid #d7d7d7;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
   position: relative;
 `;
@@ -274,4 +320,70 @@ const CrossButton = styled.div`
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   bottom: 12px;
   right: 12px;
+`;
+
+const ScheduleView = styled.div`
+  width: 100%;
+  height: 212px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: 0.5px solid #d7d7d7;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+`;
+
+const ScheduleItem = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 4px 11px;
+  height: 36px;
+  min-height: 36px;
+  border-bottom: 0.5px solid #d7d7d7;
+  color: #000;
+  font-family: Pretendard Variable;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+
+  &:hover {
+    background-color: rgba(224, 179, 23, 0.7);
+  }
+  &:active {
+    background-color: rgba(224, 179, 23, 0.7);
+  }
+  &:focus {
+    background-color: rgba(224, 179, 23, 0.7);
+  }
+`;
+
+const ScheduleTime = styled.div`
+  color: #000;
+  font-family: Pretendard Variable;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const ScheduleContent = styled.div`
+  color: #C20000;
+  font-family: Pretendard Variable;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const ScheduleDescription = styled.div`
+  color: #000;
+  font-family: Pretendard Variable;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
 `;

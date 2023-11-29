@@ -6,15 +6,17 @@ const KriticButton = ({
   rightIcon,
   height,
   padding,
+  onClick,
 }: {
   label?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   height?: string;
   padding?: string;
+  onClick?: VoidFunction;
 }) => {
   return (
-    <Button height={height}>
+    <Button height={height} onClick={onClick}>
       {leftIcon && leftIcon}
       {label && label}
       {rightIcon && rightIcon}
@@ -34,7 +36,7 @@ const Button = styled.button<{
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  border: 0.5px solid #D7D7D7;
+  border: 0.5px solid #d7d7d7;
   background-color: #fff;
   color: #000;
   font-family: Pretendard Variable;
@@ -48,7 +50,7 @@ const Button = styled.button<{
     background-color: #f3f3f3;
   }
   &:active {
-    background-color: #D7D7D7;
+    background-color: #d7d7d7;
   }
   &:focus {
     outline: none;

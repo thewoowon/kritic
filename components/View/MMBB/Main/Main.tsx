@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
-import Button from "@/components/Element/Button";
 import OpenAI from "@/public/svg/openai.svg";
 import Recording from "@/public/svg/recording.svg";
 import Streaming from "@/public/svg/streaming.svg";
@@ -9,13 +8,21 @@ import SpeechToText from "@/public/svg/speech-to-text.svg";
 import Cartoon from "@/public/svg/cartoon.svg";
 import Controller from "./Controller";
 import Content from "./Content";
+import GPT from "@/components/Element/GPT";
+import { Button } from "@/components/Element/Button";
 
 const Main = () => {
+  const [showGPT, setShowGPT] = useState(false);
   return (
     <Grid>
       <Title>요동치는 중동, 제 3차대전의 도화선되나</Title>
       <Buttons>
-        <Button rightIcon={<OpenAI />} />
+        <Button
+          rightIcon={<OpenAI />}
+          onClick={() => {
+            setShowGPT(!showGPT);
+          }}
+        />
         <Button rightIcon={<Recording />} label="REC" />
         <Button rightIcon={<Streaming />} label="STR" />
         <Button rightIcon={<SpeechToText />} label="STT" />
@@ -32,6 +39,7 @@ const Main = () => {
         <Controller />
         <Content />
       </Box>
+      {showGPT && <GPT mode="modal" />}
     </Grid>
   );
 };
@@ -44,6 +52,8 @@ const Grid = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  position: relative;
+  overflow: hidden;
 `;
 
 const Title = styled.div`

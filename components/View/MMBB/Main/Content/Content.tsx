@@ -1,4 +1,12 @@
+import delayPromise from "@/utils/delayPromise";
+import { getSelectionNodeRect, getSelectionText } from "@/utils/selection";
 import styled from "@emotion/styled";
+import { useEffect, useRef, useState } from "react";
+import { useMachine } from "@xstate/react";
+import dragStateMachine from "@/xState/dragStateMachine";
+import { getPositionOnScreen } from "@/utils/getPositionOnScreen";
+import { useChat } from "ai/react";
+import { RequestButton } from "@/components/Element/Button";
 
 const newsString = `이스라엘의 가자지구 지상군 투입이 초읽기에 들어가면서 이란의 개입 등 확전 가능성에 관심이 쏠리고 있다. 연일 ‘하마스 소탕’을 공언해온 이스라엘과 이스라엘에 ‘선제 조치’를 경고한 이란 모두 ‘두 개의 전선’에 대한 부담감으로 딜레마에 빠진 분위기다.
 
@@ -14,7 +22,67 @@ const newsString = `이스라엘의 가자지구 지상군 투입이 초읽기�
 
 이런 상황에서 섣불리 전쟁에 개입했다가 이스라엘과 미국의 반격으로 막대한 군사적 피해을 입을 경우 국민적 분노에 직면할 수 있다. 이란의 한 고위 외교관은 로이터통신에 “이란 최고 지도자인 아야톨라 알리 하메네이에게 최우선 순위는 이슬람공화국의 생존”이라며 “이것이 이란 당국이 이스라엘을 강력한 수사로 비판하면서도 직접적인 군사 개입은 자제해온 이유”라고 말했다.`;
 
+const skipLoopCycleOnce = async () => await delayPromise(1);
+
 const Content = () => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const { messages, input, handleInputChange, handleSubmit, data, isLoading } =
+    useChat();
+  const [windowPosition, setWindowPosition] = useState<{
+    top: number;
+    left: number;
+  }>({ top: 0, left: 0 });
+
+  const [state, send] = useMachine(dragStateMachine, {
+    actions: {
+      setPositionOnScreen: (context) => {
+        const { left, width, height, top } = context.selectedTextNodeRect;
+        const verticalCenter = left + width / 2;
+        const horizontalCenter = top + height / 2;
+        context.positionOnScreen = getPositionOnScreen({
+          horizontalCenter,
+          verticalCenter,
+        });
+      },
+    },
+    services: {
+      getGPTResponse: (context) => {
+        return new Promise((resolve, reject) => {
+          resolve({ firstChunk: "firstChunk" });
+        });
+      },
+    },
+  });
+  useEffect(() => {
+    const onMouseUp = async (event: MouseEvent) => {
+      await skipLoopCycleOnce();
+      send({
+        type: "TEXT_SELECTED",
+        data: {
+          selectedText: getSelectionText(),
+          selectedNodeRect: getSelectionNodeRect(),
+          requestButtonPosition: {
+            top: event.clientY,
+            left: event.clientX,
+          },
+        },
+      });
+    };
+
+    window.document.addEventListener("mouseup", onMouseUp);
+    return () => {
+      window.document.removeEventListener("mouseup", onMouseUp);
+    };
+  }, []);
+
+  const requestGPT = () => {
+    send("REQUEST");
+  };
+
+  const closeMessageBox = () => {
+    send("CLOSE_MESSAGE_BOX");
+  };
+
   return (
     <Container className="w-full h-[668px] px-[64px] py-[24px] overflow-hidden">
       {newsString.split("\n").map((line, index_1) => {
@@ -27,6 +95,31 @@ const Content = () => {
           </Line>
         );
       })}
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "none",
+        }}
+      >
+        <input
+          type="text"
+          name="question"
+          placeholder="대화를 시작하세요!"
+          required
+          value={input}
+          onChange={handleInputChange}
+          autoComplete="off"
+        />
+        <button ref={buttonRef} type="submit" disabled={isLoading}></button>
+      </form>
+      {state.hasTag("showRequestButton") && (
+        <RequestButton
+          onClick={requestGPT}
+          loading={state.matches("loading")}
+          top={state.context.requestButtonPosition.top}
+          left={state.context.requestButtonPosition.left}
+        />
+      )}
     </Container>
   );
 };
@@ -43,6 +136,7 @@ const Container = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+  position: relative;
 `;
 
 const Line = styled.div`

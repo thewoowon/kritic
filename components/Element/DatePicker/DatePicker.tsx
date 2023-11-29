@@ -51,7 +51,7 @@ const KriticDatePicker = ({ selectedDate, setSelectedDate }: Props) => {
   return (
     <div className={styles.datePickerWrapper}>
       <DatePicker
-      locale={ko}
+        locale={ko}
         dateFormat="yyyy.MM.dd"
         formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
         showYearDropdown

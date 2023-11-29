@@ -9,9 +9,11 @@ import RedGradientMedium from "@/components/svg/RedGradientMedium";
 import Title from "@/components/Element/Title";
 import SubTitle from "@/components/Element/SubTitle";
 import useScrollFadeIn from "@/hooks/useScrollFadeIn";
-import GradientSection from "@/components/svg/GradientSection";
-import HalfGradientSection from "@/components/svg/HalfGradientSection";
 import { MMBBView, DCRTView } from "@/components/View";
+import {
+  GradientSection,
+  HalfGradientSection,
+} from "@/components/Element/Gradient";
 
 export default function Home() {
   const scrollFadeIn0 = useScrollFadeIn(0.3, "20%");
@@ -19,9 +21,6 @@ export default function Home() {
   const scrollFadeIn1 = useScrollFadeIn(0.5, "50%");
   const scrollFadeIn2 = useScrollFadeIn(0.5, "50%");
   const scrollFadeIn3 = useScrollFadeIn(0.5, "50%");
-  useEffect(() => {
-    gradient.initGradient("#gradient-canvas");
-  }, []);
   return (
     <main className="flex flex-col items-center w-full mx-auto overflow-hidden">
       <Grid className="max-w-[1440px] h-screen flex justify-center items-center">
