@@ -7,6 +7,32 @@ import { Footer, Header } from "@/components/Layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { NavermapsProvider as NaverMapsProvider } from "react-naver-maps";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Filler,
+  Tooltip,
+  Legend,
+  BarElement,
+} from "chart.js";
+
+ChartJS.register(
+  RadialLinearScale,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Filler,
+  Tooltip,
+  Legend
+);
 
 const montserrat = Montserrat({
   subsets: ["latin"],

@@ -45,4 +45,16 @@ declare global {
     role: "user" | "assistant" | "error";
     content: string;
   };
+
+  type News = {
+    id: number;
+    title: string;
+    content: string;
+    journalist: string;
+    src: string;
+    press: string;
+    date: string;
+    url: string;
+    summary: string;
+  };
 }

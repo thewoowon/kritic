@@ -2,6 +2,7 @@ import { ComponentPropsWithRef, CSSProperties } from "react";
 import styled from "@emotion/styled";
 
 import { Typography, Tooltip, CircularProgress } from "@mui/material";
+import { MessageOutlined } from "@mui/icons-material";
 
 const GAP = 4;
 
@@ -51,7 +52,7 @@ function RequestButton({
     <Tooltip
       title={
         <Typography style={labelTextInlineStyle}>
-          크리틱에게 물어보세요!
+          GPT에게 물어보세요!
         </Typography>
       }
     >
@@ -68,7 +69,13 @@ function RequestButton({
         {loading ? (
           <CircularProgress size={20} color="info" style={{ color: "#fff" }} />
         ) : (
-          <Logo>Kritic</Logo>
+          <div className="bg-[#c20000] px-[4px] py-[2px] rounded-md">
+            <MessageOutlined
+              sx={{
+                color: "#fff",
+              }}
+            />
+          </div>
         )}
       </StyledRequestButton>
     </Tooltip>

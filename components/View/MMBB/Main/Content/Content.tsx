@@ -25,6 +25,7 @@ const newsString = `이스라엘의 가자지구 지상군 투입이 초읽기�
 const skipLoopCycleOnce = async () => await delayPromise(1);
 
 const Content = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { messages, input, handleInputChange, handleSubmit, data, isLoading } =
     useChat();
@@ -68,10 +69,14 @@ const Content = () => {
         },
       });
     };
+    if (containerRef.current) {
+      containerRef.current.addEventListener("mouseup", onMouseUp);
+    }
 
-    window.document.addEventListener("mouseup", onMouseUp);
     return () => {
-      window.document.removeEventListener("mouseup", onMouseUp);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("mouseup", onMouseUp);
+      }
     };
   }, []);
 
@@ -84,7 +89,10 @@ const Content = () => {
   };
 
   return (
-    <Container className="w-full h-[668px] px-[64px] py-[24px] overflow-hidden">
+    <Container
+      ref={containerRef}
+      className="w-full h-[668px] px-[64px] py-[24px] overflow-hidden"
+    >
       {newsString.split("\n").map((line, index_1) => {
         if (line.trim() === "") return;
         return (

@@ -20,6 +20,7 @@
     "@xstate/cli": "^0.5.11",
     "@xstate/react": "^3.2.2",
     "ai": "^2.2.25",
+    "chart.js": "^4.4.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.5",
     "gray-matter": "^4.0.3",

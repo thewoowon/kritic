@@ -1,6 +1,4 @@
 "use client";
-import { useEffect } from "react";
-import { gradient } from "@/components/Animation/Gradient";
 import styled from "@emotion/styled";
 import RedGradientExtra from "@/components/svg/RedGradientExtra";
 import RedGradientLarge from "@/components/svg/RedGradientLarge";
