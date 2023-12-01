@@ -57,4 +57,9 @@ declare global {
     url: string;
     summary: string;
   };
+
+  type SideMessageType = {
+    leftMessage?: React.ReactNode | null;
+    rightMessage?: React.ReactNode | null;
+  };
 }

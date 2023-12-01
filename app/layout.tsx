@@ -34,6 +34,10 @@ ChartJS.register(
   Legend
 );
 
+ChartJS.defaults.backgroundColor = "#9BD0F5";
+ChartJS.defaults.borderColor = "#fff";
+ChartJS.defaults.color = "#fff";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
 });
