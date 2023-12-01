@@ -19,10 +19,9 @@ const Container = styled.div`
   width: 100%;
   left: calc(100% + 20px);
   top: 0;
-  background: #ffffff;
-  color: white;
+  color: FFFFFF;
   border: 0.5px solid #d7d7d7;
-  background-color: #3a434d;
+  background-color: #ffffff;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 12px 12px;
@@ -30,15 +29,4 @@ const Container = styled.div`
   font-size: 14px;
   font-weight: 400;
   z-index: 100;
-
-  &:after {
-    border: 20px solid transparent;
-    border-right-color: #3a434d;
-    border-left: 0;
-    border-top: 0;
-    content: "";
-    position: absolute;
-    right: 100%;
-    top: 5px;
-  }
 `;

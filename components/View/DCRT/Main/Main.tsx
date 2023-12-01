@@ -182,7 +182,7 @@ const Main = ({ news }: { news: News }) => {
       <Title>
         {news.title}
         <RightMessageBox>
-          <div className="text-[#ffe700]">주의 ⚠</div>
+          <div className="text-[#ff5e00]">주의 ⚠</div>
           <div>
             주관이 강하게 반영되어 있습니다. 그로 인해 객관성이 떨어질 수
             있습니다. 주의하세요.
