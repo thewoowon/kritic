@@ -13,6 +13,7 @@ import {
   LeftMessageBox,
   RightMessageBox,
 } from "@/components/Element/MessageBox";
+import OpenAI from "@/public/svg/openai.svg";
 
 export const options = {
   responsive: true,
@@ -83,17 +84,19 @@ const Main = ({ news }: { news: News }) => {
     {
       rightMessage: (
         <RightMessageBox>
-          <div>GPT 간단 요약</div>
+          <div className="flex items-center gap-[4px] text-[#0055FF]">
+            GPT 기사 요약 📄
+          </div>
           <div className="flex flex-col gap-[4px]">
-            <div>[정책의 목표]</div>
+            <div className="font-semibold">[정책의 목표]</div>
             <div>가계대출을 억제하는 것</div>
           </div>
           <div className="flex flex-col gap-[4px]">
-            <div>[대책]</div>
+            <div className="font-semibold">[대책]</div>
             <div>가산 금리 인상</div>
           </div>
           <div className="flex flex-col gap-[4px]">
-            <div>[근거]</div>
+            <div className="font-semibold">[근거]</div>
             <div>현시점 동결 유지 기간</div>
           </div>
         </RightMessageBox>
@@ -190,7 +193,10 @@ const Main = ({ news }: { news: News }) => {
         </RightMessageBox>
       </Title>
       <GPTBox>
-        <div>GPT 기사 요약</div>
+        <div className="flex items-center gap-[4px]">
+          <OpenAI />
+          GPT 기사 요약
+        </div>
         <div>{news.summary}</div>
       </GPTBox>
       {news.content.split("\n").map((line, index) => {
@@ -250,6 +256,13 @@ const Main = ({ news }: { news: News }) => {
           left={state.context.requestButtonPosition.left}
         />
       )}
+      <div className="text-center text-3xl pt-[60px]">
+        AISNR(AI-driven Sustainable News Reading)
+      </div>
+      <div className="text-center text-lg">
+        <span className="text-[#0055FF]">AI 기반 지속 가능한 뉴스 읽기</span>를
+        체험해보세요.
+      </div>
     </Container>
   );
 };
