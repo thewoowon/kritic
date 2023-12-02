@@ -19,7 +19,9 @@ import {
   Tooltip,
   Legend,
   BarElement,
+  registerables,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(
   RadialLinearScale,
@@ -28,6 +30,8 @@ ChartJS.register(
   PointElement,
   LineElement,
   BarElement,
+  ...registerables,
+  ChartDataLabels,
   Title,
   Filler,
   Tooltip,
@@ -35,7 +39,6 @@ ChartJS.register(
 );
 
 ChartJS.defaults.backgroundColor = "#9BD0F5";
-ChartJS.defaults.borderColor = "#000000";
 ChartJS.defaults.color = "#000000";
 
 const montserrat = Montserrat({

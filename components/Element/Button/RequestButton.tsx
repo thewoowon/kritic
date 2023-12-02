@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 
 import { Typography, Tooltip, CircularProgress } from "@mui/material";
 import { MessageOutlined } from "@mui/icons-material";
+import { useMachine } from "@xstate/react";
+import dragStateMachine from "@/xState/dragStateMachine";
 
 const GAP = 4;
 
@@ -39,12 +41,14 @@ type GPTRequestButtonProps = {
   top: number;
   left: number;
   loading: boolean;
+  onClick: () => void;
 } & ComponentPropsWithRef<"button">;
 
 function RequestButton({
   top,
   left,
   loading,
+  onClick,
   style,
   ...restProps
 }: GPTRequestButtonProps) {
@@ -57,6 +61,7 @@ function RequestButton({
       }
     >
       <StyledRequestButton
+        onClick={onClick}
         aria-busy={loading}
         disabled={loading}
         style={{

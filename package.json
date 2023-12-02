@@ -22,6 +22,7 @@
     "@xstate/react": "^3.2.2",
     "ai": "^2.2.25",
     "chart.js": "^4.4.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^2.30.0",
     "faker": "^6.6.6",
     "framer-motion": "^10.16.5",

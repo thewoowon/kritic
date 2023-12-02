@@ -8,51 +8,198 @@ import { getPositionOnScreen } from "@/utils/getPositionOnScreen";
 import { useChat } from "ai/react";
 import { RequestButton } from "@/components/Element/Button";
 import toast from "react-hot-toast";
-import { Line, Radar, Bar } from "react-chartjs-2";
+import { Bar, Chart } from "react-chartjs-2";
+import type { ChartData, ChartOptions } from "chart.js";
 import {
   LeftMessageBox,
   RightMessageBox,
 } from "@/components/Element/MessageBox";
 import OpenAI from "@/public/svg/openai.svg";
+import ChartRiseArrow from "@/public/svg/chart-rise-arrow.svg";
 
-export const options = {
+export const options: ChartOptions<"bar" | "line"> = {
+  indexAxis: "x",
+  elements: {
+    bar: {
+      borderWidth: 2,
+    },
+  },
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
+      position: "right", // 범례의 위치를 오른쪽으로 설정
     },
     title: {
       display: false,
+      text: "가계대출 잔액 비교", // 차트의 제목
+    },
+    // bar 데이터 셋에만 라벨 설정
+  },
+  scales: {
+    x: {
+      beginAtZero: true,
+      title: {
+        display: false,
+        text: "(조 원)", // X축의 제목
+      },
+    },
+    y: {
+      // Y축의 설정은 이미지에 따라 조정될 수 있습니다.
+      beginAtZero: false,
+      title: {
+        display: false,
+        text: "기간", // Y축의 제목
+      },
+      min: 680,
+      max: 683,
+      ticks: {
+        // 필요하다면 여기에 더 많은 설정을 추가할 수 있습니다.
+        callback: (value) => {
+          return `${value}조`;
+        },
+      },
+    },
+  },
+};
+
+export const options2: ChartOptions<"bar"> = {
+  indexAxis: "y",
+  elements: {
+    bar: {
+      borderWidth: 2,
+    },
+  },
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+      position: "right", // 범례의 위치를 오른쪽으로 설정
+    },
+    title: {
+      display: false,
+      text: "신용대출, 전세대출, 주담대 비교", // 차트의 제목
+    },
+    // bar 데이터 셋에만 라벨 설정
+  },
+  scales: {
+    x: {
+      beginAtZero: true,
+      title: {
+        display: false,
+        text: "(조 원)", // X축의 제목
+      },
+    },
+    y: {
+      // Y축의 설정은 이미지에 따라 조정될 수 있습니다.
+      beginAtZero: false,
+      title: {
+        display: false,
+        text: "기간", // Y축의 제목
+      },
     },
   },
 };
 
 const barLabels1 = ["전전월", "전월"];
 const barLabels2 = ["신용대출", "전세대출", "주담대"];
+const barLabels3 = ["8월", "9월"];
 
-export const barData1 = {
+export const barData1: ChartData<"bar" | "line"> = {
   labels: barLabels1,
   datasets: [
     {
+      type: "bar",
       label: "가계대출 잔액",
       data: [680.8, 682.3],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      backgroundColor: ["#92FF88", "rgba(48, 56, 255, 0.60)"],
+      barThickness: 36,
+      datalabels: {
+        display: true,
+        color: "black",
+        align: "top",
+        anchor: "end",
+        formatter: (value) => {
+          return `${value}조`;
+        },
+      },
+    },
+    {
+      type: "line", // "line"으로 설정하면 선 차트가 됩니다.
+      label: "가계대출 잔액 추이",
+      data: [680.8, 682.3],
+      fill: false,
+      borderColor: "#C20000",
+      tension: 0.1, // 선의 곡률을 설정 (0은 직선)
+      // 선 차트 관련 다른 설정들...
+      pointStyle: "circle",
+      pointRadius: 5,
+      pointBorderColor: "#C20000",
+      datalabels: {
+        display: false,
+      },
     },
   ],
 };
 
-export const barData2 = {
-  labels: barLabels2,
+export const barData2: ChartData<"bar" | "line"> = {
+  labels: barLabels1,
   datasets: [
     {
+      type: "bar",
+      label: "가계대출 잔액",
+      data: [680.8, 682.3],
+      backgroundColor: ["#92FF88", "rgba(48, 56, 255, 0.60)"],
+      barThickness: 36,
+      datalabels: {
+        display: true,
+        color: "black",
+        align: "top",
+        anchor: "end",
+        formatter: (value) => {
+          return `${value}조`;
+        },
+      },
+    },
+  ],
+};
+
+export const barData3: ChartData<"bar"> = {
+  labels: barLabels3,
+  datasets: [
+    {
+      type: "bar",
       label: "전전월",
-      data: [680.8, 682.3, 680.8],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      data: [1000, 1000, 1000],
+      backgroundColor: ["#92FF88", "rgba(48, 56, 255, 0.60)"],
+      barThickness: 36,
+      datalabels: {
+        display: true,
+        color: "black",
+        align: "top",
+        anchor: "end",
+        formatter: (value) => {
+          return `${value}`;
+        },
+      },
     },
     {
+      type: "bar",
       label: "전월",
-      data: [680.8, 682.3, 680.8],
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+      data: [680, 682.3, 682.3],
+      backgroundColor: ["#92FF88", "rgba(48, 56, 255, 0.60)"],
+      barThickness: 36,
+      datalabels: {
+        display: true,
+        color: "black",
+        align: "top",
+        anchor: "end",
+        formatter: (value) => {
+          return `${value}`;
+        },
+      },
     },
   ],
 };
@@ -75,8 +222,16 @@ const Main = ({ news }: { news: News }) => {
       ),
       leftMessage: (
         <LeftMessageBox>
-          <Bar options={options} data={barData1} />
-          <Bar options={options} data={barData2} />
+          <BasicChartContainer>
+            <InnerChartContainer>
+              <Chart options={options} data={barData2} type="bar" />
+            </InnerChartContainer>
+            <InnerChartContainer>
+              <OverlayBox>
+                <ChartRiseArrow />
+              </OverlayBox>
+            </InnerChartContainer>
+          </BasicChartContainer>
         </LeftMessageBox>
       ),
     },
@@ -105,7 +260,12 @@ const Main = ({ news }: { news: News }) => {
     {
       leftMessage: (
         <LeftMessageBox>
-          <Bar options={options} data={barData1} />
+          <div>
+            주담대 혼합형(고정) 금리(은행채 5년물 기준) 차이를 비교했습니다.
+          </div>
+          <BasicChartContainer>
+            <Chart options={options2} data={barData3} type="bar" />
+          </BasicChartContainer>
         </LeftMessageBox>
       ),
     },
@@ -261,7 +421,7 @@ const Main = ({ news }: { news: News }) => {
       </div>
       <div className="text-center text-lg">
         <span className="text-[#0055FF]">AI 기반 지속 가능한 뉴스 읽기</span>를
-        체험해보세요.
+        만나보세요.
       </div>
     </Container>
   );
@@ -337,4 +497,28 @@ const GPTBox = styled.div`
     font-weight: 400;
     line-height: 1.5;
   }
+`;
+
+const BasicChartContainer = styled.div`
+  width: 100%;
+  min-height: 200px;
+  height: 100%;
+  margin: 12px 0;
+  position: relative;
+`;
+
+const InnerChartContainer = styled.div`
+  width: 100%;
+  min-height: 200px;
+  height: 100%;
+  position: absolute;
+`;
+
+const OverlayBox = styled.div`
+  width: fit-content;
+  position: absolute;
+  top: 30%; // 이미지의 Y 위치 조정
+  left: 55%; // 이미지의 X 위치 조정
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 `;
