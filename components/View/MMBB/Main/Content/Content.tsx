@@ -69,16 +69,18 @@ const Content = () => {
         },
       });
     };
-    if (containerRef.current) {
-      containerRef.current.addEventListener("mouseup", onMouseUp);
+
+    const current = containerRef.current;
+    if (current) {
+      current.addEventListener("mouseup", onMouseUp);
     }
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener("mouseup", onMouseUp);
+      if (current) {
+        current.removeEventListener("mouseup", onMouseUp);
       }
     };
-  }, []);
+  }, [send]);
 
   const requestGPT = () => {
     send("REQUEST");
