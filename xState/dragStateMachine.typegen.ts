@@ -49,7 +49,6 @@ export interface Typegen0 {
     getGPTResponse: "REQUEST";
   };
   matchesStates:
-    | "bye_message_box"
     | "error_message_box"
     | "idle"
     | "loading"

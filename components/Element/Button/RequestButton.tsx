@@ -1,10 +1,8 @@
 import { ComponentPropsWithRef, CSSProperties } from "react";
 import styled from "@emotion/styled";
 
-import { Typography, Tooltip, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { MessageOutlined } from "@mui/icons-material";
-import { useMachine } from "@xstate/react";
-import dragStateMachine from "@/xState/dragStateMachine";
 
 const GAP = 4;
 
@@ -53,37 +51,29 @@ function RequestButton({
   ...restProps
 }: GPTRequestButtonProps) {
   return (
-    <Tooltip
-      title={
-        <Typography style={labelTextInlineStyle}>
-          GPT에게 물어보세요!
-        </Typography>
-      }
+    <StyledRequestButton
+      onClick={onClick}
+      aria-busy={loading}
+      disabled={loading}
+      style={{
+        ...style,
+        top: `${top + GAP}px`,
+        left: `${left + GAP}px`,
+      }}
+      {...restProps}
     >
-      <StyledRequestButton
-        onClick={onClick}
-        aria-busy={loading}
-        disabled={loading}
-        style={{
-          ...style,
-          top: `${top + GAP}px`,
-          left: `${left + GAP}px`,
-        }}
-        {...restProps}
-      >
+      <div className="bg-[#c20000] px-[4px] py-[2px] rounded-md">
         {loading ? (
-          <CircularProgress size={20} color="info" style={{ color: "#fff" }} />
+          <CircularProgress size={16} color="info" style={{ color: "#fff" }} />
         ) : (
-          <div className="bg-[#c20000] px-[4px] py-[2px] rounded-md">
-            <MessageOutlined
-              sx={{
-                color: "#fff",
-              }}
-            />
-          </div>
+          <MessageOutlined
+            sx={{
+              color: "#fff",
+            }}
+          />
         )}
-      </StyledRequestButton>
-    </Tooltip>
+      </div>
+    </StyledRequestButton>
   );
 }
 

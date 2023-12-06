@@ -128,7 +128,7 @@ const dragStateMachine = createMachine(
       response_message_box: {
         tags: "showResponseMessages",
         on: {
-          CLOSE_MESSAGE_BOX: "bye_message_box",
+          CLOSE_MESSAGE_BOX: "idle",
         },
       },
       error_message_box: {
@@ -136,7 +136,6 @@ const dragStateMachine = createMachine(
           CLOSE_MESSAGE_BOX: "idle",
         },
       },
-      bye_message_box: {},
     },
   },
   {

@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -15,9 +16,18 @@ export async function POST(req: Request) {
 
   const { messages } = await req.json();
 
+  // Send the messages to the API
+
+  const chatCompletionMessageParam: ChatCompletionMessageParam[] = [
+    {
+      role: "user",
+      content: messages,
+    },
+  ];
+
   const response = await openai.chat.completions.create({
     model: "gpt-4-0613",
-    messages,
+    messages: chatCompletionMessageParam,
     temperature: 0.7,
     max_tokens: 1000,
     top_p: 1,

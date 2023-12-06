@@ -16,6 +16,8 @@ import {
 } from "@/components/Element/MessageBox";
 import OpenAI from "@/public/svg/openai.svg";
 import ChartRiseArrow from "@/public/svg/chart-rise-arrow.svg";
+import { parseSummaryResult, requestStreamApi } from "@/lib/chatGPT";
+import ChatMessageBox from "@/components/Element/MessageBox/Chat";
 
 export const options: ChartOptions<"bar" | "line"> = {
   indexAxis: "x",
@@ -280,6 +282,8 @@ const Main = ({ news }: { news: News }) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { messages, input, handleInputChange, handleSubmit, data, isLoading } =
     useChat();
   const [windowPosition, setWindowPosition] = useState<{
@@ -301,8 +305,21 @@ const Main = ({ news }: { news: News }) => {
     },
     services: {
       getGPTResponse: (context) => {
-        return new Promise((resolve, reject) => {
-          resolve({ firstChunk: "firstChunk" });
+        return new Promise(async (resolve, reject) => {
+          await skipLoopCycleOnce();
+          const response = await requestStreamApi({
+            messages: context.selectedText,
+          });
+
+          const result = await parseSummaryResult(response, (chunk) => {
+            send("RECEIVE_ING", { data: chunk });
+            resolve({
+              firstChunk: chunk,
+            });
+          });
+
+          send("RECEIVE_END");
+          resolve({ firstChunk: result });
         });
       },
     },
@@ -310,6 +327,8 @@ const Main = ({ news }: { news: News }) => {
   useEffect(() => {
     const onMouseUp = async (event: MouseEvent) => {
       await skipLoopCycleOnce();
+      console.log(event.clientY, event.clientX);
+      console.log(getSelectionNodeRect());
       send({
         type: "TEXT_SELECTED",
         data: {
@@ -322,13 +341,14 @@ const Main = ({ news }: { news: News }) => {
         },
       });
     };
-    if (containerRef.current) {
-      containerRef.current.addEventListener("mouseup", onMouseUp);
+    const currentContainer = containerRef.current; // 현재의 containerRef.current 값을 변수에 할당
+    if (currentContainer) {
+      currentContainer.addEventListener("mouseup", onMouseUp);
     }
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener("mouseup", onMouseUp);
+      if (currentContainer) {
+        currentContainer.removeEventListener("mouseup", onMouseUp);
       }
     };
   }, [send]);
@@ -353,11 +373,26 @@ const Main = ({ news }: { news: News }) => {
         </RightMessageBox>
       </Title>
       <GPTBox>
-        <div className="flex items-center gap-[4px]">
+        <div
+          className="flex items-center gap-[4px]"
+          style={{
+            fontSize: "16px",
+            fontWeight: 700,
+            marginBottom: "12px",
+          }}
+        >
           <OpenAI />
           GPT 기사 요약
         </div>
-        <div>{news.summary}</div>
+        <div
+          style={{
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: 1.5,
+          }}
+        >
+          {news.summary}
+        </div>
       </GPTBox>
       {news.content.split("\n").map((line, index) => {
         if (line.trim() === "") return;
@@ -366,15 +401,8 @@ const Main = ({ news }: { news: News }) => {
           <KriticLine
             key={index}
             onClick={() => {
-              toast.success("곧 새로운 기능으로 만나요!", {
-                icon: "😆",
-                position: "top-center",
-                style: {
-                  borderRadius: "10px",
-                  background: "#FFFFFF",
-                  color: "#000000",
-                },
-              });
+              send("CLOSE_MESSAGE_BOX");
+              return;
             }}
           >
             {line}
@@ -392,15 +420,16 @@ const Main = ({ news }: { news: News }) => {
         <div className="font-light">{news.date}</div>
       </div>
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
         style={{
           display: "none",
         }}
       >
         <input
+          ref={inputRef}
           type="text"
           name="question"
-          placeholder="대화를 시작하세요!"
           required
           value={input}
           onChange={handleInputChange}
@@ -414,6 +443,30 @@ const Main = ({ news }: { news: News }) => {
           loading={state.matches("loading")}
           top={state.context.requestButtonPosition.top}
           left={state.context.requestButtonPosition.left}
+        />
+      )}
+      {state.matches("temp_response_message_box") && (
+        <ChatMessageBox
+          content={state.context.chats.at(-1)?.content}
+          width={480}
+          isOutsideClickDisabled={true}
+          onClose={() => send("RECEIVE_CANCEL")}
+          anchorTop={state.context.anchorNodePosition.top}
+          anchorCenter={state.context.anchorNodePosition.center}
+          anchorBottom={state.context.anchorNodePosition.bottom}
+          positionOnScreen={state.context.positionOnScreen}
+        />
+      )}
+      {state.matches("response_message_box") && (
+        <ChatMessageBox
+          content={state.context.chats.at(-1)?.content}
+          width={480}
+          isOutsideClickDisabled={true}
+          onClose={() => send("CLOSE_MESSAGE_BOX")}
+          anchorTop={state.context.anchorNodePosition.top}
+          anchorCenter={state.context.anchorNodePosition.center}
+          anchorBottom={state.context.anchorNodePosition.bottom}
+          positionOnScreen={state.context.positionOnScreen}
         />
       )}
       <div className="text-center text-3xl pt-[60px]">
@@ -431,7 +484,6 @@ export default Main;
 
 // grid columns 3개로 나누기
 const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -442,7 +494,6 @@ const Container = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-  position: relative;
   margin: 0 auto;
 `;
 
@@ -487,16 +538,6 @@ const GPTBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  & > div:first-child {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  & > div:last-child {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.5;
-  }
 `;
 
 const BasicChartContainer = styled.div`

@@ -52,7 +52,6 @@ const Grid = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  position: relative;
   overflow: hidden;
 `;
 

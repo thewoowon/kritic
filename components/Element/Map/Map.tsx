@@ -86,7 +86,6 @@ const KriticMap = () => {
           }
           draggable={false}
           onClick={(e) => {
-            console.log(e);
             toast.success("곧 새로운 기능으로 만나요!", {
               icon: "😆",
               position: "top-center",
