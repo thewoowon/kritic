@@ -93,6 +93,8 @@ export const options2: ChartOptions<"bar"> = {
         display: false,
         text: "(조 원)", // X축의 제목
       },
+      min: 3,
+      stacked: true,
     },
     y: {
       // Y축의 설정은 이미지에 따라 조정될 수 있습니다.
@@ -101,6 +103,7 @@ export const options2: ChartOptions<"bar"> = {
         display: false,
         text: "기간", // Y축의 제목
       },
+      stacked: true,
     },
   },
 };
@@ -168,19 +171,21 @@ export const barData2: ChartData<"bar" | "line"> = {
   ],
 };
 
+const barData3Data = [4.0, 3.83];
+
 export const barData3: ChartData<"bar"> = {
   labels: barLabels3,
   datasets: [
     {
       type: "bar",
-      label: "전전월",
-      data: [1000, 1000, 1000],
-      backgroundColor: ["#92FF88", "rgba(48, 56, 255, 0.60)"],
-      barThickness: 36,
+      label: "9월",
+      data: [4.0, 3.83],
+      backgroundColor: ["transparent", "transparent"],
+      barThickness: 0,
       datalabels: {
         display: true,
-        color: "black",
-        align: "top",
+        color: "white",
+        align: "end",
         anchor: "end",
         formatter: (value) => {
           return `${value}`;
@@ -189,17 +194,20 @@ export const barData3: ChartData<"bar"> = {
     },
     {
       type: "bar",
-      label: "전월",
-      data: [680, 682.3, 682.3],
-      backgroundColor: ["#92FF88", "rgba(48, 56, 255, 0.60)"],
-      barThickness: 36,
+      label: "8월",
+      data: [2.471, 2.42],
+      backgroundColor: ["#FF5050", "rgba(48, 56, 255, 0.60)"],
+      barThickness: 48,
       datalabels: {
         display: true,
-        color: "black",
-        align: "top",
-        anchor: "end",
-        formatter: (value) => {
-          return `${value}`;
+        color: "white",
+        align: "end",
+        anchor: "center",
+        formatter: (value, context) => {
+          // context.dataset.data[context.dataIndex]를 통해 해당 데이터에 접근할 수 있습니다.
+          // 첫 번째 데이터 셋의 값과 누적합을 구합니다.
+          const result = barData3Data[context.dataIndex] + value;
+          return `~ ${result}`;
         },
       },
     },
