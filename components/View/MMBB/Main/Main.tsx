@@ -24,15 +24,47 @@ const Main = () => {
           }}
         />
         <Button rightIcon={<Recording />} label="REC" />
-        <Button rightIcon={<Streaming />} label="STR" />
-        <Button rightIcon={<SpeechToText />} label="STT" />
+        <Button
+          rightIcon={<Streaming />}
+          label="STR"
+          onClick={() => {
+            return;
+          }}
+        />
+        <Button
+          rightIcon={<SpeechToText />}
+          label="STT"
+          onClick={() => {
+            return;
+          }}
+        />
         <Button label="TEMPLATE" />
-        <Button rightIcon={<Cartoon />} label="TOON" />
+        <Button
+          rightIcon={<Cartoon />}
+          label="TOON"
+          onClick={() => {
+            return;
+          }}
+        />
         <Button label="FACT CHECK" />
-        <Button label="맞춤법 검사" />
-        <Button label="가독성 교정" />
-        <Button label="읽기 시간 추정" />
-        <Button label="헤드라인 최적화" />
+        <Button
+          label="맞춤법 검사"
+          onClick={() => {
+            return;
+          }}
+        />
+        <Button
+          label="가독성 교정"
+          onClick={() => {
+            return;
+          }}
+        />
+        <Button
+          label="헤드라인 최적화"
+          onClick={() => {
+            return;
+          }}
+        />
       </Buttons>
       <Box>
         <HeaderDecoration />
