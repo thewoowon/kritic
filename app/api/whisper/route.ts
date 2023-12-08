@@ -21,7 +21,8 @@ export async function POST(req: Request) {
       file: prompt,
     });
 
-    return response.text;
+    return Response.json({ text: response.text });
+  } else {
+    return Response.json({ text: "" });
   }
-  return "";
 }

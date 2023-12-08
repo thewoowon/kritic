@@ -26,5 +26,5 @@ export async function POST(req: Request) {
   // Convert the response into a friendly text-stream
 
   // Respond with the stream
-  return image_url;
+  return Response.json({ image_url });
 }
