@@ -1,0 +1,8 @@
+<svg width="100%" height="auto" viewBox="0 0 48 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line y1="2.5" x2="48" y2="2.5" stroke="black" stroke-width="5" />
+    <line y1="12.5" x2="28" y2="12.5" stroke="black" stroke-width="5" />
+    <line y1="23.5" x2="28" y2="23.5" stroke="black" stroke-width="5" />
+    <line y1="34.5" x2="48" y2="34.5" stroke="black" stroke-width="5" />
+    <line x1="32" y1="18" x2="40" y2="18" stroke="black" stroke-width="6" />
+    <path d="M48 18L39 25.7942L39 10.2058L48 18Z" fill="black" />
+</svg>

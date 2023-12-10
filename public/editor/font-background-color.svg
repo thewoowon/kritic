@@ -1,0 +1,12 @@
+<svg width="100%" height="auto" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="48" width="8" height="48" transform="rotate(90 48 0)" fill="#C20000" />
+    <rect x="48" y="8" width="8" height="48" transform="rotate(90 48 8)" fill="#FF8C21" />
+    <rect x="48" y="16" width="8" height="48" transform="rotate(90 48 16)" fill="#FFE920" />
+    <rect x="48" y="24" width="8" height="48" transform="rotate(90 48 24)" fill="#0FBA53" />
+    <rect x="48" y="32" width="8" height="48" transform="rotate(90 48 32)" fill="#0A7AFF" />
+    <rect x="48" y="40" width="8" height="48" transform="rotate(90 48 40)" fill="#8438FF" />
+    <rect x="17" y="4" width="14" height="7" fill="black" />
+    <path d="M24 4H31L42 44H35L24 4Z" fill="black" />
+    <path d="M24 4H17L6 44H13L24 4Z" fill="black" />
+    <rect x="13" y="23" width="21" height="7" fill="black" />
+</svg>

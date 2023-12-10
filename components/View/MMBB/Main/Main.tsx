@@ -10,9 +10,26 @@ import Controller from "./Controller";
 import Content from "./Content";
 import GPT from "@/components/Element/GPT";
 import { Button } from "@/components/Element/Button";
+import { KriticCartoon } from "@/components/Element/Cartoon";
 
 const Main = () => {
   const [showGPT, setShowGPT] = useState(false);
+  const [showCartoon, setShowCartoon] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleCartoon = async () => {
+    const response = await fetch("/api/dalle", {
+      method: "POST",
+      body: JSON.stringify({
+        prompt: "건강한 삶을 유지하는 가장 좋은 방법, 사과를 먹는다.",
+      }),
+    });
+
+    const data = await response.json();
+
+    setImageUrl(data.image_url);
+    setShowCartoon(true);
+  };
   return (
     <Grid>
       <Title>요동치는 중동, 제 3차대전의 도화선되나</Title>
@@ -23,7 +40,13 @@ const Main = () => {
             setShowGPT(!showGPT);
           }}
         />
-        <Button rightIcon={<Recording />} label="REC" />
+        <Button
+          rightIcon={<Recording />}
+          label="REC"
+          onClick={() => {
+            return;
+          }}
+        />
         <Button
           rightIcon={<Streaming />}
           label="STR"
@@ -38,30 +61,32 @@ const Main = () => {
             return;
           }}
         />
-        <Button label="TEMPLATE" />
         <Button
-          rightIcon={<Cartoon />}
-          label="TOON"
+          label="TEMPLATE"
           onClick={() => {
             return;
           }}
         />
+        <Button rightIcon={<Cartoon />} label="TOON" onClick={handleCartoon} />
         <Button label="FACT CHECK" />
         <Button
           label="맞춤법 검사"
           onClick={() => {
+            // 맞춤법 검사 -> gpt
             return;
           }}
         />
         <Button
           label="가독성 교정"
           onClick={() => {
+            // 가독성 교정 -> gpt
             return;
           }}
         />
         <Button
           label="헤드라인 최적화"
           onClick={() => {
+            // 헤드라인 최적화 -> gpt
             return;
           }}
         />
@@ -72,6 +97,7 @@ const Main = () => {
         <Content />
       </Box>
       {showGPT && <GPT mode="modal" />}
+      {showCartoon && <KriticCartoon mode="modal" imageUrl={imageUrl} />}
     </Grid>
   );
 };

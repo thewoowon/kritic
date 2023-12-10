@@ -21,7 +21,7 @@ export async function parseSummaryResult(
 }
 
 export async function requestStreamApi({ messages }: { messages: string }) {
-  return fetch("/api/chat", {
+  return fetch("/api/drag", {
     headers: {
       "Content-Type": "text/event-stream",
       withCredentials: "true",

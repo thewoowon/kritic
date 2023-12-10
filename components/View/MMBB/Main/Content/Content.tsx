@@ -25,6 +25,7 @@ const newsString = `이스라엘의 가자지구 지상군 투입이 초읽기�
 const skipLoopCycleOnce = async () => await delayPromise(1);
 
 const Content = () => {
+  const newsStringArray = newsString.split(" ");
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { messages, input, handleInputChange, handleSubmit, data, isLoading } =
@@ -95,6 +96,12 @@ const Content = () => {
       ref={containerRef}
       className="w-full h-[668px] px-[64px] py-[24px] overflow-hidden"
     >
+      <div className="flex items-center justify-center gap-[4px] border border-slate-100 my-[6px] font-medium">
+        <div className="text-md">추정 읽기 시간</div>
+        <div className="text-[#C20000]">
+          {Math.ceil(newsStringArray.length / 600)}분
+        </div>
+      </div>
       {newsString.split("\n").map((line, index_1) => {
         if (line.trim() === "") return;
         return (
