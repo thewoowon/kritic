@@ -26,14 +26,13 @@ body {
   position: relative;
 }
 
-.react-datepicker{
-  padding: 4px 0 0 0 !important;
-  border: 0.5px solid #D7D7D7 !important;
+.react-datepicker {
+  border: none !important;
 }
 
-.react-datepicker__day-names{
+.react-datepicker__day-names {
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-around;
   padding: 0 6px;

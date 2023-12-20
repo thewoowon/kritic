@@ -16,8 +16,23 @@
   
 
   &:focus {
-    border: 2px solid #EDAE0D;
+    border: 2px solid #ffdf7f;
   }
+}
+
+.datePickerWrapper {
+  width: 100%;
+  z-index: 100;
+  background-color: colors.$WHITE;
+  border: 0.5px solid #D7D7D7;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pretendard Variable", serif;
 }
 
 .customHeaderContainer {
@@ -84,9 +99,9 @@
 }
 
 .selectedDay {
-  background-color: #EDAE0D;
+  background-color: #ffdf7f;
   &:hover {
-    background-color: #EDAE0D;
+    background-color: #ffdf7f;
   }
 }
 

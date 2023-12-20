@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Satellite from "@/public/svg/satellite.svg";
 import Cross from "@/public/svg/cross.svg";
+import DateCalendar from "@/components/Element/DateCalendar";
 
 const memoList = [
   {
@@ -55,9 +56,27 @@ const scheduleList = [
   },
   {
     id: 5,
-    time: "16:00",
+    time: "17:00",
     content: "저녁 식사 회동",
     description: "OO식당에서 식사",
+  },
+  {
+    id: 6,
+    time: "17:30",
+    content: "OOO 간사 방문",
+    description: "잠시 문서 전달 차 온다고 연락",
+  },
+  {
+    id: 7,
+    time: "18:30",
+    content: "데스크 피드백 확인",
+    description: "OO기자단 데스크 피드백 확인",
+  },
+  {
+    id: 8,
+    time: "19:00",
+    content: "마감 전화",
+    description: "OO기자단 마감 전화",
   },
 ];
 
@@ -70,33 +89,37 @@ const Side = () => {
   return (
     <Grid>
       <div className="flex gap-[9px]">
-        <Box>
-          <Title>모닝 브리핑</Title>
-          <div className="w-full pt-[17px] flex flex-row gap-[8px]">
-            <OrderList>
-              <Order>
-                <div className="flex justify-between items-center w-full">
-                  <OrderTitle>전일 뉴스 종합</OrderTitle>
-                  <Confirm>확인하기</Confirm>
-                </div>
-                <div>전일 뉴스 총 104건 준비되었습니다.</div>
-              </Order>
-              <Order>
-                <div className="flex justify-between items-center w-full">
-                  <OrderTitle>오늘 취재할 내용</OrderTitle>
-                  <Confirm>확인하기</Confirm>
-                </div>
-                <div>OO대 이사장 국정 감사 파행</div>
-              </Order>
-              <Order>
-                <div className="flex justify-between items-center w-full">
-                  <OrderTitle>주요 이슈 보고</OrderTitle>
-                  <Confirm>확인하기</Confirm>
-                </div>
-                <div>새벽 03시 OO고속도로 13중 추돌 사고... 3명 사망</div>
-              </Order>
-            </OrderList>
-          </div>
+        <Box backgroundColor="transparent">
+          <OrderList>
+            <Order>
+              <div className="flex justify-between items-center w-full">
+                <OrderTitle>전일 뉴스 종합</OrderTitle>
+                <Confirm>확인하기</Confirm>
+              </div>
+              <div>전일 뉴스 총 104건 준비되었습니다.</div>
+            </Order>
+            <Order>
+              <div className="flex justify-between items-center w-full">
+                <OrderTitle>오늘 취재할 내용</OrderTitle>
+                <Confirm>확인하기</Confirm>
+              </div>
+              <div>OO대 이사장 국정 감사 파행</div>
+            </Order>
+            <Order>
+              <div className="flex justify-between items-center w-full">
+                <OrderTitle>주요 이슈 보고</OrderTitle>
+                <Confirm>확인하기</Confirm>
+              </div>
+              <div>새벽 03시 OO고속도로 13중 추돌 사고... 3명 사망</div>
+            </Order>
+            <Order>
+              <div className="flex justify-between items-center w-full">
+                <OrderTitle>실시간 키워드</OrderTitle>
+                <Confirm>확인하기</Confirm>
+              </div>
+              <div>빅카인즈 키워드</div>
+            </Order>
+          </OrderList>
         </Box>
         <MemoView>
           <HeaderDecoration />
@@ -114,34 +137,34 @@ const Side = () => {
           </CrossButton>
         </MemoView>
       </div>
-      <Box>
-        <div className="flex w-full justify-between items-center">
-          <Title>출근 지역</Title>
-          <SatelliteDiv>
-            <Satellite />
-          </SatelliteDiv>
-        </div>
+      <Box alignItems="center">
         <KriticMap />
       </Box>
-      <Box className="flex flex-col justify-between">
-        <div className="flex justify-center gap-[9px]">
-          <KriticDatePicker selectedDate={date} setSelectedDate={setDate} />
-          <ScheduleView>
-            {scheduleList.map((schedule) => (
-              <ScheduleItem key={schedule.id}>
-                <div className="flex flex-row justify-between items-center gap-[4px] w-full">
-                  <ScheduleTime>{schedule.time}</ScheduleTime>
-                  <ScheduleContent>{schedule.content}</ScheduleContent>
-                </div>
-                <ScheduleDescription>
-                  {schedule.description}
-                </ScheduleDescription>
-              </ScheduleItem>
-            ))}
-          </ScheduleView>
-        </div>
-        <AlertBox>데스크 보고 시간입니다. 시간을 준수하세요.</AlertBox>
-      </Box>
+      <BottomGrid>
+        <ScheduleView>
+          {scheduleList.map((schedule) => (
+            <ScheduleItem key={schedule.id}>
+              <div className="flex flex-row justify-between items-center gap-[4px] w-full">
+                <ScheduleTime>{schedule.time}</ScheduleTime>
+                <ScheduleContent>{schedule.content}</ScheduleContent>
+              </div>
+              <ScheduleDescription>{schedule.description}</ScheduleDescription>
+            </ScheduleItem>
+          ))}
+        </ScheduleView>
+        <ScheduleView>
+          {scheduleList.map((schedule) => (
+            <ScheduleItem key={schedule.id}>
+              <div className="flex flex-row justify-between items-center gap-[4px] w-full">
+                <ScheduleTime>{schedule.time}</ScheduleTime>
+                <ScheduleContent>{schedule.content}</ScheduleContent>
+              </div>
+              <ScheduleDescription>{schedule.description}</ScheduleDescription>
+            </ScheduleItem>
+          ))}
+        </ScheduleView>
+        {/* <AlertBox>데스크 보고 시간입니다. 시간을 준수하세요.</AlertBox> */}
+      </BottomGrid>
     </Grid>
   );
 };
@@ -153,20 +176,21 @@ const Grid = styled.div`
   width: 512px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr 1.5fr;
   grid-gap: 13px;
   grid-auto-flow: column;
 `;
 
-const Box = styled.div`
+const Box = styled.div<{
+  backgroundColor?: string;
+  alignItems?: string;
+}>`
   width: 100%;
   height: 100%;
-  background-color: #ffffff;
-  border: 0.5px solid #d7d7d7;
-  border-radius: 5px;
-  background: #fff;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: ${(props) => props.alignItems || "flex-start"};
 `;
 
 const Title = styled.div`
@@ -174,14 +198,17 @@ const Title = styled.div`
   font-family: Pretendard Variable;
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
+  padding: 12px 0;
 `;
 
 const OrderList = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
   flex: 1;
@@ -193,18 +220,18 @@ const Order = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding: 14px 11px;
-  height: 66px;
   border: 0.5px solid #d7d7d7;
   border-radius: 5px;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   width: 100%;
+  height: 100%;
   color: #000;
   font-family: Pretendard Variable;
   font-size: 9px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const OrderTitle = styled.div`
@@ -217,7 +244,7 @@ const OrderTitle = styled.div`
 `;
 
 const Confirm = styled.div`
-  color: #000;
+  color: #c20000;
   font-family: Pretendard Variable;
   font-size: 10px;
   font-style: normal;
@@ -225,7 +252,14 @@ const Confirm = styled.div`
   line-height: normal;
   // 언더라인 gap
   display: flex;
-  border-bottom: 0.8px solid #5f5f5f;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 1px;
+    text-decoration-color: #c20000;
+  }
 `;
 
 const MemoView = styled.div`
@@ -257,13 +291,13 @@ const MemoItem = styled.div`
   line-height: normal;
 
   &:hover {
-    background-color: rgba(224, 179, 23, 0.7);
+    background-color: #ffdf7f;
   }
   &:active {
-    background-color: rgba(224, 179, 23, 0.7);
+    background-color: #ffdf7f;
   }
   &:focus {
-    background-color: rgba(224, 179, 23, 0.7);
+    background-color: #ffdf7f;
   }
 `;
 
@@ -297,7 +331,6 @@ const SatelliteDiv = styled.div`
   border-radius: 3px;
   border: 0.5px solid #d7d7d7;
   background: #fff;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   padding: 6px;
 `;
 
@@ -320,11 +353,16 @@ const CrossButton = styled.div`
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   bottom: 12px;
   right: 12px;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
 `;
 
 const ScheduleView = styled.div`
   width: 100%;
-  height: 212px;
+  height: 100%;
   border-radius: 5px;
   background-color: #ffffff;
   border: 0.5px solid #d7d7d7;
@@ -371,7 +409,7 @@ const ScheduleTime = styled.div`
 `;
 
 const ScheduleContent = styled.div`
-  color: #C20000;
+  color: #c20000;
   font-family: Pretendard Variable;
   font-size: 9px;
   font-style: normal;
@@ -386,4 +424,14 @@ const ScheduleDescription = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+`;
+
+const BottomGrid = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 9px;
+  grid-auto-flow: column;
 `;

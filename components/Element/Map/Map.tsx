@@ -12,6 +12,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useRecoilState } from "recoil";
+import Satellite from "@/public/svg/satellite.svg";
 
 type LatLng = {
   searchString: string;
@@ -61,12 +62,11 @@ const KriticMap = () => {
     <MapDiv
       style={{
         width: "100%",
-        height: "217px",
+        height: "100%",
         overflow: "hidden",
         position: "relative",
-        marginTop: "15px",
         borderRadius: "5px",
-        border: "1px solid #d7d7d7",
+        border: "0.5px solid #d7d7d7",
       }}
     >
       <NaverMap
@@ -120,6 +120,9 @@ const KriticMap = () => {
             </div>
           </ModalPanel>
         )}
+        <SatelliteDiv>
+          <Satellite />
+        </SatelliteDiv>
       </NaverMap>
     </MapDiv>
   );
@@ -139,4 +142,19 @@ const ModalPanel = styled.div<{ x: number; y: number }>`
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   border: 0.5px solid #d7d7d7;
   color: #000000;
+`;
+
+const SatelliteDiv = styled.div`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 3px;
+  border: 0.5px solid #d7d7d7;
+  background: #fff;
+  padding: 6px;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
 `;

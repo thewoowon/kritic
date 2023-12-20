@@ -165,7 +165,7 @@ export default function RootLayout({
           content={process.env.NEXT_PUBLIC_OG_LOCALE}
         />
       </head>
-      <body className={montserrat.className}>
+      <body>
         <QueryClientProvider client={queryClient}>
           <RecoilRoot>
             <NaverMapsProvider
