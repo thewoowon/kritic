@@ -7,6 +7,7 @@ import Image from "next/image";
 import Satellite from "@/public/svg/satellite.svg";
 import Cross from "@/public/svg/cross.svg";
 import DateCalendar from "@/components/Element/DateCalendar";
+import Search from "@/public/svg/search.svg";
 
 const memoList = [
   {
@@ -88,6 +89,13 @@ const Side = () => {
   const [date, setDate] = useState<Date | null>(new Date());
   return (
     <Grid>
+      <SearchView>
+        {/* 여기는 검색창 */}
+        <SearchIcon>
+          <Search />
+        </SearchIcon>
+        <SearchInput placeholder="검색어를 입력하세요." />
+      </SearchView>
       <div className="flex gap-[9px]">
         <Box backgroundColor="transparent">
           <OrderList>
@@ -141,27 +149,110 @@ const Side = () => {
         <KriticMap />
       </Box>
       <BottomGrid>
-        <ScheduleView>
-          {scheduleList.map((schedule) => (
-            <ScheduleItem key={schedule.id}>
-              <div className="flex flex-row justify-between items-center gap-[4px] w-full">
-                <ScheduleTime>{schedule.time}</ScheduleTime>
-                <ScheduleContent>{schedule.content}</ScheduleContent>
+        <ActivityView>
+          {/* 이곳에는 사용자가 최근에 작업한 기사, 리뷰한 내용, 또는 코멘트한 항목 */}
+          <ActivityList>
+            <Activity>
+              <ActivityLeft>
+                <div className="rounded-full border-2 w-[50px] h-[50px] overflow-hidden">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={"/assets/jr-1.jpg"}
+                    alt="journalist"
+                  />
+                </div>
+              </ActivityLeft>
+              <div className="py-[5px]">
+                <div className="flex justify-between items-center w-full">
+                  <ActivityTitle>
+                    OOOO 공개매수 종료...주가 4%대 하락
+                  </ActivityTitle>
+                </div>
+                <div className="text-[#333333] font-normal">김희정 기자</div>
+                <div>{new Date().toISOString().slice(0, 10)}</div>
               </div>
-              <ScheduleDescription>{schedule.description}</ScheduleDescription>
-            </ScheduleItem>
-          ))}
-        </ScheduleView>
-        <ScheduleView>
-          {scheduleList.map((schedule) => (
-            <ScheduleItem key={schedule.id}>
-              <div className="flex flex-row justify-between items-center gap-[4px] w-full">
-                <ScheduleTime>{schedule.time}</ScheduleTime>
-                <ScheduleContent>{schedule.content}</ScheduleContent>
+            </Activity>
+            <Activity>
+              <ActivityLeft>
+                <div className="rounded-full border-2 w-[50px] h-[50px] overflow-hidden">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={"/assets/jr-2.jpg"}
+                    alt="journalist"
+                  />
+                </div>
+              </ActivityLeft>
+              <div className="py-[5px]">
+                <div className="flex justify-between items-center w-full">
+                  <ActivityTitle>
+                    4배 뛰었다...치솟는 운임에 커지는 물류대란 우려
+                  </ActivityTitle>
+                </div>
+                <div className="text-[#333333] font-normal">김석일 기자</div>
+                <div>{new Date().toISOString().slice(0, 10)}</div>
               </div>
-              <ScheduleDescription>{schedule.description}</ScheduleDescription>
-            </ScheduleItem>
-          ))}
+            </Activity>
+            <Activity>
+              <ActivityLeft>
+                <div className="rounded-full border-2 w-[50px] h-[50px] overflow-hidden">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={"/assets/jr-3.jpg"}
+                    alt="journalist"
+                  />
+                </div>
+              </ActivityLeft>
+              <div className="py-[5px]">
+                <div className="flex justify-between items-center w-full">
+                  <ActivityTitle>
+                    검찰, ‘허위사실 공표’ 혐의 OOO 교육감 기소
+                  </ActivityTitle>
+                </div>
+                <div className="text-[#333333] font-normal">이주빈 기자</div>
+                <div>{new Date().toISOString().slice(0, 10)}</div>
+              </div>
+            </Activity>
+            <Activity>
+              <ActivityLeft>
+                <div className="rounded-full border-2 w-[50px] h-[50px] overflow-hidden">
+                  <Image
+                    width={50}
+                    height={50}
+                    src={"/assets/jr-3.jpg"}
+                    alt="journalist"
+                  />
+                </div>
+              </ActivityLeft>
+              <div className="py-[5px]">
+                <div className="flex justify-between items-center w-full">
+                  <ActivityTitle>
+                    검찰, ‘허위사실 공표’ 혐의 OOO 교육감 기소
+                  </ActivityTitle>
+                </div>
+                <div className="text-[#333333] font-normal">이주빈 기자</div>
+                <div>{new Date().toISOString().slice(0, 10)}</div>
+              </div>
+            </Activity>
+          </ActivityList>
+        </ActivityView>
+        <ScheduleView>
+          <DateCalendar />
+          <ScheduleList>
+            {scheduleList.map((schedule) => (
+              <ScheduleItem key={schedule.id}>
+                <div className="flex flex-row justify-between items-center gap-[4px] w-full">
+                  <ScheduleTime>{schedule.time}</ScheduleTime>
+                  <ScheduleContent>{schedule.content}</ScheduleContent>
+                </div>
+                <ScheduleDescription>
+                  {schedule.description}
+                </ScheduleDescription>
+              </ScheduleItem>
+            ))}
+          </ScheduleList>
         </ScheduleView>
         {/* <AlertBox>데스크 보고 시간입니다. 시간을 준수하세요.</AlertBox> */}
       </BottomGrid>
@@ -176,7 +267,7 @@ const Grid = styled.div`
   width: 512px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: 1fr 1fr 1.5fr;
+  grid-template-rows: 0.2fr 1fr 1fr 1fr;
   grid-gap: 13px;
   grid-auto-flow: column;
 `;
@@ -369,6 +460,20 @@ const ScheduleView = styled.div`
   overflow-y: hidden;
   overflow-x: hidden;
   position: relative;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const ScheduleList = styled.div`
+  width: 100%;
+  height: 144px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ScheduleItem = styled.div`
@@ -389,13 +494,13 @@ const ScheduleItem = styled.div`
   line-height: normal;
 
   &:hover {
-    background-color: rgba(224, 179, 23, 0.7);
+    background-color: #ffdf7f;
   }
   &:active {
-    background-color: rgba(224, 179, 23, 0.7);
+    background-color: #ffdf7f;
   }
   &:focus {
-    background-color: rgba(224, 179, 23, 0.7);
+    background-color: #ffdf7f;
   }
 `;
 
@@ -434,4 +539,111 @@ const BottomGrid = styled.div`
   grid-template-rows: 1fr;
   grid-gap: 9px;
   grid-auto-flow: column;
+`;
+
+const ActivityView = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+`;
+
+const SearchView = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: 0.5px solid #d7d7d7;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const SearchIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  margin: 0 0 0 12px;
+  padding: 3px;
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-family: Pretendard Variable;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  color: #000;
+  padding: 0 12px;
+  &::placeholder {
+    color: #d7d7d7;
+  }
+`;
+
+const ActivityList = styled.div`
+  width: 100%;
+  height: 289px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Activity = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 14px 11px;
+  border: 0.5px solid #d7d7d7;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  font-family: Pretendard Variable;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+`;
+
+const ActivityLeft = styled.div`
+  color: #000;
+  font-family: Pretendard Variable;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  min-width: 60px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ActivityTitle = styled.div`
+  color: #000;
+  font-family: Pretendard Variable;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;

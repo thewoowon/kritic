@@ -34,6 +34,7 @@ const Logo = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
+  font-family: "Montserrat", sans-serif;
 `;
 
 const Ul = styled.ul`

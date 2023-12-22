@@ -119,9 +119,7 @@ const Main = () => {
           label="헤드라인 최적화"
           onClick={() => {
             // 헤드라인 최적화 -> gpt
-            setTitle(
-              "중동의 심장, 위태로운 평화: 이스라엘과 가자의 긴장이 국제적 위기로 번질 위험"
-            );
+            setTitle("중동의 심장, 위태로운 평화: 이스라엘과 가자의 긴장");
             toast.success("헤드라인을 최적화 했어요!", {
               icon: "📰",
               position: "top-center",
@@ -138,7 +136,7 @@ const Main = () => {
       </Buttons>
       <Box>
         <HeaderDecoration />
-        <Controller />
+        {/* <Controller /> */}
         <Content content={content} />
       </Box>
       {showGPT && <GPT mode="modal" />}
@@ -162,7 +160,7 @@ const Grid = styled.div`
 const Title = styled.div`
   color: #000;
   font-family: Pretendard Variable;
-  font-size: 42px;
+  font-size: 40px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

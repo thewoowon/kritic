@@ -71,4 +71,5 @@ const InnerText = styled.div`
   color: white;
   font-weight: 900;
   padding-left: 32px;
+  font-family: "Montserrat", sans-serif;
 `;

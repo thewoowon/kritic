@@ -91,4 +91,5 @@ const Logo = styled.div`
   align-items: center;
   color: white;
   z-index: 1;
+  font-family: "Montserrat", sans-serif;
 `;

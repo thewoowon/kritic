@@ -73,7 +73,7 @@ const Wrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-  color: #4e5968;
+  color: #121212;
   font-weight: 400;
   display: flex;
   flex-direction: row;
@@ -93,4 +93,5 @@ const Logo = styled.div`
   background-color: #c20000;
   color: #fff;
   padding: 0.5rem 1.3rem;
+  font-family: "Montserrat", sans-serif;
 `;

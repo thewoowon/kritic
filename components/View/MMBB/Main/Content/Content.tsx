@@ -95,10 +95,10 @@ const Content = ({ content }: { content: string }) => {
   return (
     <Container
       ref={containerRef}
-      className="w-full h-[668px] px-[64px] py-[24px] overflow-hidden"
+      className="w-full h-full px-[64px] py-[24px] overflow-scroll scroll"
     >
       <div className="flex items-center justify-center gap-[4px] border border-slate-100 my-[6px] font-medium text-sm">
-        <div>추정 읽기 시간</div>
+        <div>평균 읽기 시간</div>
         <div className="text-[#C20000]">
           {Math.ceil(newsStringArray.length / 600)}분
         </div>
