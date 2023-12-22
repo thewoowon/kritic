@@ -170,7 +170,7 @@ export default Content;
 
 const Container = styled.div`
   width: 100%;
-  height: 668px;
+  height: 100%;
   padding: 24px 64px;
   color: #000;
   font-family: Pretendard Variable;
