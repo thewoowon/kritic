@@ -221,7 +221,7 @@ const Side = () => {
                   <Image
                     width={50}
                     height={50}
-                    src={"/assets/jr-3.jpg"}
+                    src={"/assets/jr-4.jpg"}
                     alt="journalist"
                   />
                 </div>
@@ -229,10 +229,10 @@ const Side = () => {
               <div className="py-[5px]">
                 <div className="flex justify-between items-center w-full">
                   <ActivityTitle>
-                    검찰, ‘허위사실 공표’ 혐의 OOO 교육감 기소
+                    2나노 핵심 장비 인텔로 먼저 갔다…OOO
                   </ActivityTitle>
                 </div>
-                <div className="text-[#333333] font-normal">이주빈 기자</div>
+                <div className="text-[#333333] font-normal">심경빈 기자</div>
                 <div>{new Date().toISOString().slice(0, 10)}</div>
               </div>
             </Activity>
@@ -465,7 +465,7 @@ const ScheduleView = styled.div`
 
 const ScheduleList = styled.div`
   width: 100%;
-  height: 144px;
+  height: 176px;
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
@@ -589,7 +589,7 @@ const SearchInput = styled.input`
 
 const ActivityList = styled.div`
   width: 100%;
-  height: 289px;
+  height: 265px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -611,7 +611,7 @@ const Activity = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 14px 11px;
+  padding: 7px 8px;
   border: 0.5px solid #d7d7d7;
   border-radius: 5px;
   background-color: #ffffff;
@@ -623,6 +623,7 @@ const Activity = styled.div`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+  gap: 8px;
 `;
 
 const ActivityLeft = styled.div`
@@ -642,7 +643,7 @@ const ActivityLeft = styled.div`
 const ActivityTitle = styled.div`
   color: #000;
   font-family: Pretendard Variable;
-  font-size: 13px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
