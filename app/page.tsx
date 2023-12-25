@@ -43,10 +43,7 @@ export default function Home() {
           {...scrollFadeIn1}
           className=" text-center text-[28px] font-semibold"
         >
-          기자를 위한 단 하나의 라이프 루틴 플랫폼
-          <br />
-          강력한 에디터와 AI 기반 지속 가능한 뉴스 읽기로 정보의 바다를
-          항해하세요.
+          강력한 에디터와 AI 기반 지속 가능한 뉴스 읽기로 생산성을 극대화하세요.
           <br />
           크리틱과 함께라면, 기자님의 일상은 더욱 빛나는 스토리가 됩니다.
         </div>
