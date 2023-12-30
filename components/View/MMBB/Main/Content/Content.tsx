@@ -179,6 +179,11 @@ const Container = styled.div`
   font-weight: 300;
   line-height: normal;
   position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Line = styled.div`
