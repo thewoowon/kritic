@@ -19,6 +19,7 @@ export default function Home() {
   const scrollFadeIn1 = useScrollFadeIn(0.5, "50%");
   const scrollFadeIn2 = useScrollFadeIn(0.5, "50%");
   const scrollFadeIn3 = useScrollFadeIn(0.5, "50%");
+  const scrollFadeIn4 = useScrollFadeIn(0.5, "50%");
   return (
     <main className="flex flex-col items-center w-full mx-auto overflow-hidden">
       <Grid className="max-w-[1440px] h-screen flex justify-center items-center">
@@ -43,9 +44,10 @@ export default function Home() {
           {...scrollFadeIn1}
           className=" text-center text-[28px] font-semibold"
         >
-          강력한 에디터와 AI 기반 지속 가능한 뉴스 읽기로 생산성을 극대화하세요.
+          강력한 생성형 AI 기반의 에디터로 당신의 창의력과 생산성을
+          극대화하세요.
           <br />
-          크리틱과 함께라면, 기자님의 일상은 더욱 빛나는 스토리가 됩니다.
+          이전보다 더 빠르게, 더 정확하게, 더 편리하게.
         </div>
       </Section>
       <Section bgColor="#fff" className="max-w-[1440px] py-[200px]">
@@ -53,7 +55,7 @@ export default function Home() {
           {...scrollFadeIn2}
           className="flex items-baseline gap-[6px] w-full"
         >
-          <Title>mm:bb</Title>
+          <Title fontFamily={"Josefin Sans"}>mm:bb</Title>
           <SubTitle>
             기자를 위한 최고의 에디터,{" "}
             <span className="font-semibold">명명백백(明明白白)</span>
@@ -76,12 +78,22 @@ export default function Home() {
         <GradientSection />
         <Slogan>Always be Awake!</Slogan>
       </div>
-      <Section bgColor="#fff" className="max-w-[1440px] py-[200px]">
+      <Section bgColor="#F9FAFB">
         <div
           {...scrollFadeIn3}
+          className=" text-center text-[28px] font-semibold"
+        >
+          AISNR(AI-driven Sustainable News Reading)
+          <br />
+          크리틱이 제안하는 이전에 없던 새로운 뉴스 리딩 방식.
+        </div>
+      </Section>
+      <Section bgColor="#fff" className="max-w-[1440px] py-[200px]">
+        <div
+          {...scrollFadeIn4}
           className="flex items-baseline gap-[6px] w-full"
         >
-          <Title>D:CRT</Title>
+          <Title fontFamily={"Monoton"}>D:CRT</Title>
           <SubTitle>
             기사의 본질을 꿰뚫다,{" "}
             <span className="font-semibold">데카르트</span>

@@ -2,12 +2,14 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { usePathname, useRouter } from "next/navigation";
+import I18N from "./I18N";
 
 const CONSTANT_ROUTER = [
   { pathname: "/", label: "홈" },
   { pathname: "/product", label: "제품소개" },
   { pathname: "/support", label: "고객센터" },
-  { pathname: "/playground", label: "Playground" },
+  { pathname: "/playground", label: "플레이그라운드" },
+  { pathname: "/newsroom", label: "뉴스룸" },
 ];
 
 const Header = () => {
@@ -35,8 +37,8 @@ const Header = () => {
                 {item.label}
               </li>
             ))}
-            <li>
-              <button>KOR</button> | <button>ENG</button>
+            <li className="w-[18px] h-[18px]">
+              <I18N color="#121212" />
             </li>
           </Ul>
         </div>
